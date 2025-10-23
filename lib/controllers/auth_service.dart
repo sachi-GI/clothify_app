@@ -2,7 +2,6 @@ import 'package:clothify_app/controllers/db_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  // create new account using email password method
   Future<String> createAccountWithEmail(
     String name,
     String email,
@@ -20,7 +19,6 @@ class AuthService {
     }
   }
 
-  // login with email password method
   Future<String> loginWithEmail(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -33,7 +31,6 @@ class AuthService {
     }
   }
 
-  // logout method
   Future<String> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
@@ -43,7 +40,6 @@ class AuthService {
     }
   }
 
-  //reset password method
   Future<String> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
@@ -53,7 +49,6 @@ class AuthService {
     }
   }
 
-  // check if user is logged in
   Future<bool> isLoggedIn() async {
     var user = FirebaseAuth.instance.currentUser;
     return user != null;

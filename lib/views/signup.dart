@@ -119,7 +119,7 @@ class _SignupPageState extends State<SignupPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Colors.blueAccent.shade400,
                     foregroundColor: Colors.white,
                   ),
                   child: Text("Sign Up", style: TextStyle(fontSize: 16)),

@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Colors.blueAccent.shade400,
                     foregroundColor: Colors.white,
                   ),
                   child: Text("Login", style: TextStyle(fontSize: 16)),

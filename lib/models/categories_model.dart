@@ -11,17 +11,15 @@ class CategoriesModel {
     required this.priority,
   });
 
-  //convert to json to object model
   factory CategoriesModel.fromJson(Map<String, dynamic> json, String id) {
     return CategoriesModel(
       name: json['name'] ?? '',
       image: json['image'] ?? '',
       priority: json['priority'] ?? 0,
-      id: id ?? '',
+      id: id,
     );
   }
 
-  //convert List<QueryDocumentSnapshot> to List<CategoriesModel>
   static List<CategoriesModel> fromJsonList(List<QueryDocumentSnapshot> list) {
     return list
         .map(

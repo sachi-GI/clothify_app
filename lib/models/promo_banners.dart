@@ -13,7 +13,6 @@ class PromoBannersModel {
     required this.id,
   });
 
-  //convert to json to object model
   factory PromoBannersModel.fromJson(Map<String, dynamic> json, String id) {
     return PromoBannersModel(
       title: json['title'] ?? '',
@@ -23,7 +22,6 @@ class PromoBannersModel {
     );
   }
 
-  //convert List<QueryDocumentSnapshot to List<PromoBannersModel>
   static List<PromoBannersModel> fromJsonList(
     List<QueryDocumentSnapshot> list,
   ) {

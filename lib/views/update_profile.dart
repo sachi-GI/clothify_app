@@ -107,7 +107,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Colors.blueAccent.shade400,
                       foregroundColor: Colors.white,
                     ),
                     child: Text(

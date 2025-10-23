@@ -1,4 +1,5 @@
 import 'package:clothify_app/controllers/auth_service.dart';
+import 'package:clothify_app/providers/cart_provider.dart';
 import 'package:clothify_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -115,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 style: TextStyle(fontSize: 14),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Theme.of(context).primaryColor,
+                                backgroundColor: Colors.blueAccent.shade400,
                                 foregroundColor: Colors.white,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 16,
@@ -145,21 +146,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text("Orders"),
+                      title: Text("My Orders"),
                       leading: Icon(Icons.local_shipping_outlined),
-                      onTap: () async {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "/orders");
+                      },
                     ),
                     Divider(thickness: 1, endIndent: 10, indent: 10),
                     ListTile(
                       title: Text("Help & Support"),
                       leading: Icon(Icons.support_agent),
-                      onTap: () async {},
+                      onTap: () {},
                     ),
                     Divider(thickness: 1, endIndent: 10, indent: 10),
                     ListTile(
                       title: Text("Logout"),
                       leading: Icon(Icons.logout_outlined),
                       onTap: () async {
+                        Provider.of<UserProvider>(
+                          context,
+                          listen: false,
+                        ).cancelProvider();
+                        Provider.of<CartProvider>(
+                          context,
+                          listen: false,
+                        ).cancelProvider();
                         await AuthService().logout();
                         Navigator.pushNamedAndRemoveUntil(
                           context,

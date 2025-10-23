@@ -17,9 +17,9 @@ class _CategoryState extends State<Category> {
       stream: DbService().readCategories(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<CategoriesModel> categories =
-              CategoriesModel.fromJsonList(snapshot.data!.docs)
-                  as List<CategoriesModel>;
+          List<CategoriesModel> categories = CategoriesModel.fromJsonList(
+            snapshot.data!.docs,
+          );
           if (categories.isEmpty) {
             return SizedBox();
           } else {
@@ -37,12 +37,11 @@ class _CategoryState extends State<Category> {
           }
         } else {
           return Shimmer(
-            child: Container(height: 90, width: double.infinity),
             gradient: LinearGradient(
               colors: [Colors.grey.shade200, Colors.white],
             ),
+            child: SizedBox(height: 90, width: double.infinity),
           );
-          ;
         }
       },
     );
@@ -76,7 +75,7 @@ class _CategoryButtonState extends State<CategoryButton> {
         height: 95,
         width: 95,
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: Colors.blue.shade50,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:clothify_app/controllers/db_service.dart';
 import 'package:clothify_app/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,7 +17,6 @@ class UserProvider extends ChangeNotifier {
     loadUserData();
   }
 
-  //load user data from Firestore
   void loadUserData() {
     _userSubscription?.cancel();
     _userSubscription = DbService().readUserData().listen((snapshot) {
@@ -30,5 +30,15 @@ class UserProvider extends ChangeNotifier {
       address = data.address;
       notifyListeners();
     });
+  }
+
+  void cancelProvider() {
+    _userSubscription?.cancel();
+  }
+
+  @override
+  void dispose() {
+    cancelProvider();
+    super.dispose();
   }
 }
