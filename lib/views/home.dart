@@ -10,6 +10,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Best Deals")));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Best Deals",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
   }
 }

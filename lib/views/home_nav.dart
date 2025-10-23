@@ -1,4 +1,5 @@
 import 'package:clothify_app/views/home.dart';
+import 'package:clothify_app/views/profile.dart';
 import 'package:flutter/material.dart';
 
 class HomeNav extends StatefulWidget {
@@ -11,7 +12,7 @@ class HomeNav extends StatefulWidget {
 class _HomeNavState extends State<HomeNav> {
   int selectedIndex = 0;
 
-  List pages = [HomePage(), Text("Orders"), Text("Cart"), Text("Profile")];
+  List pages = [HomePage(), Text("Orders"), Text("Cart"), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
