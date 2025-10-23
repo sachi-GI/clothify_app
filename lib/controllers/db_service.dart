@@ -33,4 +33,21 @@ class DbService {
         .doc(user!.uid)
         .snapshots();
   }
+
+  //READ PROMOS AND BANNERS
+  Stream<QuerySnapshot> readPromos() {
+    return FirebaseFirestore.instance.collection("shop_promos").snapshots();
+  }
+
+  Stream<QuerySnapshot> readBanners() {
+    return FirebaseFirestore.instance.collection("shop_banners").snapshots();
+  }
+
+  //READ CATEGORIES
+  Stream<QuerySnapshot> readCategories() {
+    return FirebaseFirestore.instance
+        .collection("shop_categories")
+        .orderBy("priority", descending: true)
+        .snapshots();
+  }
 }
