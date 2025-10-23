@@ -10,6 +10,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final formkey = GlobalKey<FormState>();
+  TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   @override
@@ -34,6 +35,19 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     Text("Create a new account to get started"),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .9,
+                      child: TextFormField(
+                        validator: (value) =>
+                            value!.isEmpty ? "Name cannot be empty." : null,
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          label: Text("Name"),
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 10),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .9,
@@ -74,6 +88,7 @@ class _SignupPageState extends State<SignupPage> {
                     if (formkey.currentState!.validate()) {
                       AuthService()
                           .createAccountWithEmail(
+                            _nameController.text,
                             _emailController.text,
                             _passwordController.text,
                           )
