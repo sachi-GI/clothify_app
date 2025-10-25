@@ -34,7 +34,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -46,9 +45,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blueAccent.shade400,
-          ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         ),
         routes: {
           "/": (context) => const CheckUser(),

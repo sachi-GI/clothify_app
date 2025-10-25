@@ -224,7 +224,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blueAccent.shade400,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             foregroundColor: Colors.white,
           ),
           child: Text("Proceed to Payment"),

@@ -233,7 +233,9 @@ class _ViewOrderState extends State<ViewOrder> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent.shade400,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
                           foregroundColor: Colors.white,
                         ),
                         child: Text("Modify Order"),

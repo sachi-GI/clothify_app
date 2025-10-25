@@ -27,10 +27,7 @@ class _CategoryState extends State<Category> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: categories
-                    .map(
-                      (cat) =>
-                          CategoryButton(imagepath: cat.image, name: cat.name),
-                    )
+                    .map((cat) => CategoryButton(name: cat.name))
                     .toList(),
               ),
             );
@@ -49,12 +46,8 @@ class _CategoryState extends State<Category> {
 }
 
 class CategoryButton extends StatefulWidget {
-  final String imagepath, name;
-  const CategoryButton({
-    super.key,
-    required this.imagepath,
-    required this.name,
-  });
+  final String name;
+  const CategoryButton({super.key, required this.name});
 
   @override
   State<CategoryButton> createState() => _CategoryButtonState();
@@ -75,21 +68,64 @@ class _CategoryButtonState extends State<CategoryButton> {
         height: 95,
         width: 95,
         decoration: BoxDecoration(
-          color: Colors.blue.shade50,
-          borderRadius: BorderRadius.circular(20),
+          color: Colors.teal.shade100,
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(widget.imagepath, height: 50),
+            CircleAvatar(
+              radius: 26,
+              backgroundColor: _colorFromString(widget.name).withOpacity(0.12),
+              child: CircleAvatar(
+                radius: 22,
+                backgroundColor: _colorFromString(widget.name),
+                child: Text(
+                  _initial(widget.name),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 8),
-            Text(
-              "${widget.name.substring(0, 1).toUpperCase()}${widget.name.substring(1)}",
+            Flexible(
+              child: Text(
+                widget.name.isNotEmpty
+                    ? widget.name[0].toUpperCase() + widget.name.substring(1)
+                    : '',
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Color _colorFromString(String s) {
+    if (s.isEmpty) return Colors.grey;
+    final code = s.codeUnits.fold<int>(0, (p, c) => p + c);
+    final colors = [
+      Colors.teal,
+      Colors.indigo,
+      Colors.deepPurple,
+      Colors.orange,
+      Colors.pink,
+      Colors.blue,
+      Colors.green,
+      Colors.brown,
+    ];
+    return colors[code % colors.length];
+  }
+
+  String _initial(String s) {
+    if (s.isEmpty) return '?';
+    return s[0].toUpperCase();
   }
 }

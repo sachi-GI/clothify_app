@@ -17,49 +17,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Row(
           children: [
-            Image.asset('images/logo.jpg', height: 40, fit: BoxFit.contain),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Container(
-                height: 42,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.07),
-                      blurRadius: 8,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: TextField(
-                  style: TextStyle(color: Colors.black87, fontSize: 16),
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    hintText: 'Search here...',
-                    hintStyle: TextStyle(color: Colors.grey[500]),
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 0,
-                    ),
-                    isDense: true,
-                    border: InputBorder.none,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.blueAccent.shade400,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
           ],
         ),
         toolbarHeight: 64,
-        backgroundColor: Colors.blue.shade50,
+        backgroundColor: Colors.white,
         elevation: 0.5,
       ),
       body: Padding(
@@ -67,11 +29,6 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Text(
-                "Best Deals",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(height: 12),
               Promo(),
               SizedBox(height: 16),
               Column(

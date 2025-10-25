@@ -1,8 +1,6 @@
-import 'package:clothify_app/components/banner.dart';
 import 'package:clothify_app/components/offer_zone.dart';
 import 'package:clothify_app/controllers/db_service.dart';
 import 'package:clothify_app/models/categories_model.dart';
-import 'package:clothify_app/models/promo_banners.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -14,11 +12,6 @@ class HomePageViewMore extends StatefulWidget {
 }
 
 class _HomePageViewMoreState extends State<HomePageViewMore> {
-  int min = 0;
-  minCalculator(int a, int b) {
-    return min = a > b ? b : a;
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -31,45 +24,11 @@ class _HomePageViewMoreState extends State<HomePageViewMore> {
           if (categories.isEmpty) {
             return SizedBox();
           } else {
-            return StreamBuilder(
-              stream: DbService().readBanners(),
-              builder: (context, bannerSnapshot) {
-                if (bannerSnapshot.hasData) {
-                  List<PromoBannersModel> banners =
-                      PromoBannersModel.fromJsonList(snapshot.data!.docs);
-                  if (banners.isEmpty) {
-                    return SizedBox();
-                  } else {
-                    return Column(
-                      children: [
-                        for (
-                          int i = 0;
-                          i <
-                              minCalculator(
-                                snapshot.data!.docs.length,
-                                bannerSnapshot.data!.docs.length,
-                              );
-                          i++
-                        )
-                          Column(
-                            children: [
-                              OfferZone(
-                                category: snapshot.data!.docs[i]["name"],
-                              ),
-                              Banners(
-                                image: bannerSnapshot.data!.docs[i]["image"],
-                                category:
-                                    bannerSnapshot.data!.docs[i]["category"],
-                              ),
-                            ],
-                          ),
-                      ],
-                    );
-                  }
-                } else {
-                  return SizedBox();
-                }
-              },
+            return Column(
+              children: [
+                for (int i = 0; i < snapshot.data!.docs.length; i++)
+                  OfferZone(category: snapshot.data!.docs[i]["name"]),
+              ],
             );
           }
         } else {

@@ -15,178 +15,253 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text(
-          "Profile",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
+        backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'Profile',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: Consumer<UserProvider>(
         builder: (context, value, child) => SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 30),
-              CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.grey[200],
-                child: Icon(
-                  Icons.account_circle,
-                  size: 110,
-                  color: Colors.grey[600],
+              Container(
+                height: 180,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.primary.withOpacity(0.85),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(24),
+                    bottomRight: Radius.circular(24),
+                  ),
+                ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned(
+                      left: 20,
+                      top: 36,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            value.name.isNotEmpty ? value.name : 'Guest User',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            value.email,
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      right: 20,
+                      bottom: -40,
+                      child: CircleAvatar(
+                        radius: 48,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 44,
+                          backgroundColor: Colors.grey[100],
+                          child: Icon(
+                            Icons.account_circle,
+                            size: 72,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 56),
+
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 2,
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 18,
+                    ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Icon(Icons.person, color: Colors.blueGrey),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                value.name,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
+                        _buildInfoRow(
+                          icon: Icons.person_outline,
+                          label: 'Name',
+                          valueText: value.name,
                         ),
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Icon(Icons.email, color: Colors.blueGrey),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                value.email,
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          ],
+                        Divider(),
+                        _buildInfoRow(
+                          icon: Icons.email_outlined,
+                          label: 'Email',
+                          valueText: value.email,
                         ),
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Icon(Icons.home, color: Colors.blueGrey),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                value.address.isNotEmpty
-                                    ? value.address
-                                    : "Add your address",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          ],
+                        Divider(),
+                        _buildInfoRow(
+                          icon: Icons.home_outlined,
+                          label: 'Address',
+                          valueText: value.address.isNotEmpty
+                              ? value.address
+                              : 'Add your address',
                         ),
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Icon(Icons.phone, color: Colors.blueGrey),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                value.phone.isNotEmpty
-                                    ? value.phone
-                                    : "Add your phone number",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                          ],
+                        Divider(),
+                        _buildInfoRow(
+                          icon: Icons.phone_outlined,
+                          label: 'Phone',
+                          valueText: value.phone.isNotEmpty
+                              ? value.phone
+                              : 'Add your phone number',
                         ),
-                        SizedBox(height: 12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton.icon(
-                              icon: Icon(Icons.edit, size: 16),
-                              label: Text(
-                                "Edit Profile",
-                                style: TextStyle(fontSize: 14),
+                        SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: OutlinedButton.icon(
+                            icon: Icon(Icons.edit, size: 16),
+                            label: Text('Edit Profile'),
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent.shade400,
-                                foregroundColor: Colors.white,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 8,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                minimumSize: Size(0, 32),
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                elevation: 1,
+                              side: BorderSide(
+                                color: Theme.of(context).colorScheme.primary,
                               ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/update_profile');
-                              },
+                              foregroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
                             ),
-                          ],
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/update_profile');
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+
+              SizedBox(height: 18),
+
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
-                    ListTile(
-                      title: Text("My Orders"),
-                      leading: Icon(Icons.local_shipping_outlined),
-                      onTap: () {
-                        Navigator.pushNamed(context, "/orders");
-                      },
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 1,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.grey[100],
+                          child: Icon(
+                            Icons.local_shipping_outlined,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        title: Text('My Orders'),
+                        trailing: Icon(Icons.chevron_right),
+                        onTap: () {
+                          Navigator.pushNamed(context, "/orders");
+                        },
+                      ),
                     ),
-                    Divider(thickness: 1, endIndent: 10, indent: 10),
-                    ListTile(
-                      title: Text("Help & Support"),
-                      leading: Icon(Icons.support_agent),
-                      onTap: () {},
-                    ),
-                    Divider(thickness: 1, endIndent: 10, indent: 10),
-                    ListTile(
-                      title: Text("Logout"),
-                      leading: Icon(Icons.logout_outlined),
-                      onTap: () async {
-                        Provider.of<UserProvider>(
-                          context,
-                          listen: false,
-                        ).cancelProvider();
-                        Provider.of<CartProvider>(
-                          context,
-                          listen: false,
-                        ).cancelProvider();
-                        await AuthService().logout();
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          '/login',
-                          (route) => true,
-                        );
-                      },
+                    SizedBox(height: 10),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 1,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.grey[100],
+                          child: Icon(
+                            Icons.logout_outlined,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                        title: Text('Logout'),
+                        trailing: Icon(Icons.chevron_right),
+                        onTap: () async {
+                          Provider.of<UserProvider>(
+                            context,
+                            listen: false,
+                          ).cancelProvider();
+                          Provider.of<CartProvider>(
+                            context,
+                            listen: false,
+                          ).cancelProvider();
+                          await AuthService().logout();
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/login',
+                            (route) => true,
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
               ),
+
               SizedBox(height: 30),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildInfoRow({
+    required IconData icon,
+    required String label,
+    required String valueText,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: Colors.grey[700]),
+        SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              ),
+              SizedBox(height: 4),
+              Text(valueText, style: TextStyle(fontSize: 16)),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

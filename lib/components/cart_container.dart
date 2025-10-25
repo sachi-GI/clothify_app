@@ -123,7 +123,7 @@ class _CartContainerState extends State<CartContainer> {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: Colors.green,
+                              color: Colors.red.shade700,
                             ),
                           ),
                         ],

@@ -35,9 +35,9 @@ class _HomeNavState extends State<HomeNav> {
             selectedIndex = value;
           });
         },
-        backgroundColor: Colors.blue.shade50,
+        backgroundColor: Colors.teal.shade100,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blueAccent.shade400,
+        selectedItemColor: Colors.teal.shade900,
         unselectedItemColor: Colors.grey.shade600,
         showSelectedLabels: true,
         showUnselectedLabels: true,

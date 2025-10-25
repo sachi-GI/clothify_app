@@ -75,7 +75,7 @@ class _CartPageState extends State<CartPage> {
                       Navigator.pushNamed(context, "/checkout");
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent.shade400,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor: Colors.white,
                     ),
                     child: Text("Procced to Checkout"),
